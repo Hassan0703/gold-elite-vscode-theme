@@ -27,7 +27,6 @@
   },
   "activationEvents": [
     "onStartupFinished",
-    "onView:goldElite.commandCenter",
     "onCommand:gold-elite-2-0.openFontPage",
     "onCommand:gold-elite-2-0.replayBoot",
     "onCommand:gold-elite-2-0.resetAllData",
@@ -39,6 +38,23 @@
     "url": "https://github.com/hassan-ali/gold-elite-2-0"
   },
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "goldElite",
+          "title": "Gold Elite",
+          "icon": "assets/images/ge-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "goldElite": [
+        {
+          "id": "goldElite.commandCenter",
+          "name": "Command Center"
+        }
+      ]
+    },
     "themes": [
       {
         "label": "Gold_Elite-2.0",

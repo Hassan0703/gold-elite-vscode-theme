@@ -88,7 +88,7 @@ function openCommandCenter(context) {
   if (!isFeatureEnabled('commandCenter.enabled')) return;
   const autoOpen = vscode.workspace.getConfiguration(CONFIG_NS).get('commandCenter.autoOpenOnStartup', true);
   if (!autoOpen) return;
-  vscode.commands.executeCommand('workbench.view.extension.goldElite');
+  vscode.commands.executeCommand('workbench.view.extension.goldElite').then(undefined, () => {});
 }
 
 class CCProvider {
@@ -425,7 +425,7 @@ function setupDec(ctx) {
     const ed = vscode.window.activeTextEditor;
     if (!ed || ed.document.uri.toString() !== doc.uri.toString()) return;
     const r = new vscode.Range(ed.document.lineAt(0).range.start, ed.document.lineAt(ed.document.lineCount-1).range.end);
-    const oldFlash = flashDec;
+    if (flashDec) flashDec.dispose();
     flashDec = vscode.window.createTextEditorDecorationType({border:'2px solid #FFD700', borderWidth:'0 0 0 2px'});
     ctx.subscriptions.push(flashDec);
     ed.setDecorations(flashDec, [{range: r}]);
