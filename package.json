@@ -1,0 +1,125 @@
+{
+  "name": "gold-elite-2-0",
+  "displayName": "Gold_Elite-2.0",
+  "description": "A premium near-black VS Code theme with a gold-emerald dual-tone accent system. Warm, cohesive, and unmissable — the signature IDE experience.",
+  "version": "0.4.0",
+  "publisher": "hassan-ali",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.129.0"
+  },
+  "categories": [
+    "Themes",
+    "Other"
+  ],
+  "keywords": [
+    "theme",
+    "dark theme",
+    "gold",
+    "elite",
+    "minimal",
+    "gold theme",
+    "dark"
+  ],
+  "galleryBanner": {
+    "color": "#0A0A0A",
+    "theme": "dark"
+  },
+  "activationEvents": [
+    "onStartupFinished",
+    "onView:goldElite.commandCenter",
+    "onCommand:gold-elite-2-0.openFontPage",
+    "onCommand:gold-elite-2-0.replayBoot",
+    "onCommand:gold-elite-2-0.resetAllData",
+    "onCommand:gold-elite-2-0.diagnose"
+  ],
+  "main": "./extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hassan-ali/gold-elite-2-0"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Gold_Elite-2.0",
+        "uiTheme": "vs-dark",
+        "path": "./themes/gold-elite-color-theme.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "gold-elite-2-0.openFontPage",
+        "title": "Gold Elite: Open Font Download Page"
+      },
+      {
+        "command": "gold-elite-2-0.replayBoot",
+        "title": "Gold Elite: Replay Boot Sequence"
+      },
+      {
+        "command": "gold-elite-2-0.resetAllData",
+        "title": "Gold Elite: Reset All Local Data"
+      },
+      {
+        "command": "gold-elite-2-0.diagnose",
+        "title": "Gold Elite: Diagnostics"
+      }
+    ],
+    "configuration": {
+      "title": "Gold Elite",
+      "properties": {
+        "goldElite.experience.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Master switch for all Gold Elite signature experience features."
+        },
+        "goldElite.bootSequence.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the boot sequence on startup."
+        },
+        "goldElite.commandCenter.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the Command Center dashboard."
+        },
+        "goldElite.commandCenter.autoOpenOnStartup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-open Command Center on startup."
+        },
+        "goldElite.livingStatusBar.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable living status bar features."
+        },
+        "goldElite.saveFlash.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show save flash animation."
+        },
+        "goldElite.achievements.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable the achievement system."
+        },
+        "goldElite.sound.enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Play sound cues."
+        },
+        "goldElite.sound.volume": {
+          "type": "number",
+          "default": 40,
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Sound volume (0-100)."
+        },
+        "goldElite.ecosystemTheming.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Adapt other extensions' colors."
+        }
+      }
+    }
+  }
+}

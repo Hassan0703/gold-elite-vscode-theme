@@ -1,0 +1,149 @@
+{
+  "$schema": "vscode://schemas/icon-theme",
+  "name": "Gold Elite Icons",
+  "iconDefinitions": {
+    "_file": {
+      "iconPath": "./svg/default_file.svg"
+    },
+    "_folder": {
+      "iconPath": "./svg/default_folder.svg"
+    },
+    "_folder_open": {
+      "iconPath": "./svg/default_folder_open.svg"
+    },
+    "_ts": {
+      "iconPath": "./svg/ts.svg"
+    },
+    "_tsx": {
+      "iconPath": "./svg/tsx.svg"
+    },
+    "_js": {
+      "iconPath": "./svg/js.svg"
+    },
+    "_jsx": {
+      "iconPath": "./svg/jsx.svg"
+    },
+    "_json": {
+      "iconPath": "./svg/json.svg"
+    },
+    "_md": {
+      "iconPath": "./svg/md.svg"
+    },
+    "_html": {
+      "iconPath": "./svg/html.svg"
+    },
+    "_css": {
+      "iconPath": "./svg/css.svg"
+    },
+    "_scss": {
+      "iconPath": "./svg/scss.svg"
+    },
+    "_vue": {
+      "iconPath": "./svg/vue.svg"
+    },
+    "_py": {
+      "iconPath": "./svg/py.svg"
+    },
+    "_env": {
+      "iconPath": "./svg/env.svg"
+    },
+    "_git": {
+      "iconPath": "./svg/git_.svg"
+    },
+    "_gitignore": {
+      "iconPath": "./svg/gitignore.svg"
+    },
+    "_yml": {
+      "iconPath": "./svg/yml.svg"
+    },
+    "_yaml": {
+      "iconPath": "./svg/yaml.svg"
+    },
+    "_png": {
+      "iconPath": "./svg/png.svg"
+    },
+    "_jpg": {
+      "iconPath": "./svg/jpg.svg"
+    },
+    "_svg": {
+      "iconPath": "./svg/svg_file.svg"
+    },
+    "_lock": {
+      "iconPath": "./svg/lock.svg"
+    }
+  },
+  "file": "_file",
+  "folder": "_folder",
+  "folderExpanded": "_folder_open",
+  "folderNames": {
+    ".vscode": "_folder",
+    "node_modules": "_folder",
+    "dist": "_folder",
+    "build": "_folder",
+    "src": "_folder",
+    "public": "_folder",
+    "assets": "_folder",
+    "components": "_folder",
+    "utils": "_folder",
+    "helpers": "_folder",
+    "hooks": "_folder",
+    "services": "_folder"
+  },
+  "folderNamesExpanded": {
+    ".vscode": "_folder_open",
+    "node_modules": "_folder_open",
+    "dist": "_folder_open",
+    "build": "_folder_open",
+    "src": "_folder_open",
+    "public": "_folder_open",
+    "assets": "_folder_open",
+    "components": "_folder_open",
+    "utils": "_folder_open",
+    "helpers": "_folder_open",
+    "hooks": "_folder_open",
+    "services": "_folder_open"
+  },
+  "fileExtensions": {
+    "ts": "_ts",
+    "tsx": "_tsx",
+    "js": "_js",
+    "jsx": "_jsx",
+    "json": "_json",
+    "md": "_md",
+    "mdx": "_md",
+    "html": "_html",
+    "htm": "_html",
+    "css": "_css",
+    "scss": "_scss",
+    "sass": "_scss",
+    "vue": "_vue",
+    "py": "_py",
+    "env": "_env",
+    "yml": "_yml",
+    "yaml": "_yaml",
+    "png": "_png",
+    "jpg": "_jpg",
+    "jpeg": "_jpg",
+    "svg": "_svg",
+    "lock": "_lock"
+  },
+  "fileNames": {
+    ".gitignore": "_gitignore",
+    ".gitattributes": "_git",
+    ".gitmodules": "_git",
+    ".gitkeep": "_git",
+    "package-lock.json": "_lock",
+    "yarn.lock": "_lock",
+    "pnpm-lock.yaml": "_lock",
+    ".env": "_env",
+    ".env.example": "_env",
+    ".env.local": "_env",
+    ".env.development": "_env",
+    ".env.production": "_env",
+    ".editorconfig": "_git",
+    ".prettierrc": "_json",
+    ".eslintrc": "_json",
+    "tsconfig.json": "_json",
+    "tsconfig": "_json"
+  }
+}

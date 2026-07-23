@@ -1,0 +1,66 @@
+# Repository labels for Gold Elite
+# Usage: https://github.com/actions/labeler
+
+- name: bug
+  description: Something isn't working
+  color: d73a4a
+
+- name: enhancement
+  description: New feature or request
+  color: a2eeef
+
+- name: documentation
+  description: Improvements or additions to documentation
+  color: 0075ca
+
+- name: good first issue
+  description: Good for newcomers
+  color: 7057ff
+
+- name: help wanted
+  description: Extra attention is needed
+  color: 008672
+
+- name: question
+  description: Further information is requested
+  color: d876e3
+
+- name: performance
+  description: Performance-related
+  color: 0E8A16
+
+- name: accessibility
+  description: Accessibility-related
+  color: 1F8F6B
+
+- name: privacy
+  description: Privacy-related
+  color: 2ECC9A
+
+- name: duplicate
+  description: This issue or PR already exists
+  color: cfd3d7
+
+- name: wontfix
+  description: This will not be worked on
+  color: ffffff
+
+- name: invalid
+  description: This doesn't seem right
+  color: e4e669
+
+- name: vscode-compatibility
+  description: VS Code version compatibility
+  color: BFA53A
+
+- name: theming
+  description: Color theme or token-related
+  color: FFD700
+
+- name: dashboard
+  description: Command Center dashboard
+  color: 6E6A5E
+
+- name: statusbar
+  description: Living Status Bar
+  color: 17523F

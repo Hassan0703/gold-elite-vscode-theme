@@ -1,0 +1,31 @@
+# VS Code extension
+*.vsix
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+
+# Build
+dist/
+out/
+*.js.map
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# PRD files (not part of the extension)
+*-PRD.md

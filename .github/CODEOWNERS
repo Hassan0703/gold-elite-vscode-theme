@@ -1,0 +1,17 @@
+# Default code owners
+* @hassan-ali
+
+# Package manifest
+package.json @hassan-ali
+
+# Extension entry point
+extension.js @hassan-ali
+
+# Themes
+/themes/ @hassan-ali
+
+# Icons
+/icons/ @hassan-ali
+
+# Documentation
+*.md @hassan-ali

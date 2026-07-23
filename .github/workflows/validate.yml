@@ -1,0 +1,48 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate package.json
+        run: node -e "JSON.parse(require('fs').readFileSync('package.json','utf8')); console.log('package.json OK')"
+
+      - name: Validate themes JSON
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('themes/gold-elite-color-theme.json','utf8')); console.log('theme OK')"
+          node -e "JSON.parse(require('fs').readFileSync('themes/gold-elite.tokens.json','utf8')); console.log('tokens OK')"
+
+      - name: Validate icon themes JSON
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('icons/gold-elite-icon-theme.json','utf8')); console.log('icon theme OK')"
+          node -e "JSON.parse(require('fs').readFileSync('icons/gold-elite-product-icon-theme.json','utf8')); console.log('product icon theme OK')"
+
+      - name: Validate SVG files
+        run: |
+          for f in icons/svg/*.svg icons/product-icons/*.svg assets/images/*.svg; do
+            echo "Validating $f"
+            head -c 100 "$f" | grep -q 'xmlns="http://www.w3.org/2000/svg"' && echo "  OK" || (echo "  INVALID: $f" && exit 1)
+          done
+
+      - name: Build VSIX
+        run: npx @vscode/vsce package --out gold-elite-validate.vsix 2>&1
+
+      - name: Check for banned patterns (network calls, telemetry)
+        run: |
+          ! grep -rn 'fetch(' extension.js && echo "No fetch() calls — OK"
+          ! grep -rn 'XMLHttpRequest' extension.js && echo "No XMLHttpRequest — OK"
+          ! grep -rn 'axios' extension.js && echo "No axios — OK"
+          ! grep -rn 'telemetry' extension.js && echo "No telemetry — OK"

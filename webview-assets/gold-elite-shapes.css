@@ -1,0 +1,68 @@
+.ge-facet-card {
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  background: #111111;
+  border: 1px solid #3A3320;
+}
+.ge-facet-card--gold { border-color: #BFA53A; }
+.ge-facet-card--emerald { border-color: #1F8F6B; }
+
+.ge-hex-badge {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ge-hex-badge--gold { background: radial-gradient(circle, #FFD700 0%, #0A0A0A 100%); }
+.ge-hex-badge--emerald { background: radial-gradient(circle, #2ECC9A 0%, #0A0A0A 100%); }
+
+.ge-hex-badge--sm {
+  width: 20px; height: 20px;
+}
+.ge-hex-badge--xs {
+  width: 14px; height: 14px;
+}
+
+.ge-diamond-bullet {
+  width: 6px; height: 6px;
+  background: #BFA53A;
+  transform: rotate(45deg);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.ge-dual-sweep {
+  background: linear-gradient(90deg, #FFD700 0%, #2ECC9A 50%, #FFD700 100%);
+  background-size: 200% 100%;
+  animation: ge-sweep 6s linear infinite;
+}
+@keyframes ge-sweep {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.ge-section-separator {
+  height: 1px;
+  background: linear-gradient(90deg, #2A2820 0%, #3A3320 50%, #2A2820 100%);
+  margin: 12px 0;
+}
+
+.ge-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 5px 16px;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.ge-stat-label {
+  color: #8A8578;
+  font-weight: 400;
+}
+.ge-stat-value {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ge-dual-sweep { animation: none; background-position: 0 0; }
+}

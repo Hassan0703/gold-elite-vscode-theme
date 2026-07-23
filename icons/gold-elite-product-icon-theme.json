@@ -1,0 +1,30 @@
+{
+  "iconDefinitions": {
+    "explorer": { "iconPath": "./product-icons/explorer.svg" },
+    "search": { "iconPath": "./product-icons/search.svg" },
+    "source-control": { "iconPath": "./product-icons/source-control.svg" },
+    "debug-alt": { "iconPath": "./product-icons/debug-alt.svg" },
+    "extensions": { "iconPath": "./product-icons/extensions.svg" },
+    "accounts": { "iconPath": "./product-icons/accounts.svg" },
+    "gear": { "iconPath": "./product-icons/gear.svg" },
+    "close": { "iconPath": "./product-icons/close.svg" },
+    "add": { "iconPath": "./product-icons/add.svg" },
+    "folder": { "iconPath": "./product-icons/folder.svg" },
+    "folder-opened": { "iconPath": "./product-icons/folder-opened.svg" },
+    "save": { "iconPath": "./product-icons/save.svg" },
+    "refresh": { "iconPath": "./product-icons/refresh.svg" },
+    "chevron-down": { "iconPath": "./product-icons/chevron-down.svg" },
+    "chevron-right": { "iconPath": "./product-icons/chevron-right.svg" },
+    "info": { "iconPath": "./product-icons/info.svg" },
+    "warning": { "iconPath": "./product-icons/warning.svg" },
+    "error": { "iconPath": "./product-icons/error.svg" },
+    "check": { "iconPath": "./product-icons/check.svg" },
+    "trash": { "iconPath": "./product-icons/trash.svg" },
+    "terminal": { "iconPath": "./product-icons/terminal.svg" },
+    "code": { "iconPath": "./product-icons/code.svg" },
+    "play": { "iconPath": "./product-icons/play.svg" },
+    "pause": { "iconPath": "./product-icons/pause.svg" },
+    "layout": { "iconPath": "./product-icons/layout.svg" },
+    "sort-precedence": { "iconPath": "./product-icons/sort-precedence.svg" }
+  }
+}
