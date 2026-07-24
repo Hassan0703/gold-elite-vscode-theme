@@ -88,7 +88,7 @@ function openCommandCenter(context) {
   if (!isFeatureEnabled('commandCenter.enabled')) return;
   const autoOpen = vscode.workspace.getConfiguration(CONFIG_NS).get('commandCenter.autoOpenOnStartup', true);
   if (!autoOpen) return;
-  vscode.commands.executeCommand('workbench.view.extension.goldElite').then(undefined, () => {});
+  vscode.commands.executeCommand('workbench.view.goldElite').then(undefined, () => {});
 }
 
 class CCProvider {
@@ -108,19 +108,21 @@ class CCProvider {
     );
   }
   resolveWebviewView(v) {
-    this.view = v;
-    v.webview.options = { enableScripts: true, localResourceRoots: [vscode.Uri.file(this.ctx.extensionPath)] };
-    this._render();
-    this._start();
-    v.webview.onDidReceiveMessage(msg => {
-      if (msg.t === 'open' && msg.p) {
-        const uri = vscode.Uri.file(msg.p);
-        vscode.workspace.openTextDocument(uri).then(doc => {
-          vscode.window.showTextDocument(doc, { preserveFocus: false });
-        });
-      }
-    });
-    v.onDidDispose(() => this._stop());
+    try {
+      this.view = v;
+      v.webview.options = { enableScripts: true, localResourceRoots: [vscode.Uri.file(this.ctx.extensionPath)] };
+      this._render();
+      this._start();
+      v.webview.onDidReceiveMessage(msg => {
+        if (msg.t === 'open' && msg.p) {
+          const uri = vscode.Uri.file(msg.p);
+          vscode.workspace.openTextDocument(uri).then(doc => {
+            vscode.window.showTextDocument(doc, { preserveFocus: false });
+          }, () => {});
+        }
+      });
+      v.onDidDispose(() => this._stop());
+    } catch(e) { console.error('GE: view resolve error',e); }
   }
   _render() {
     if (!this.view) return;
@@ -388,9 +390,9 @@ function achToast(ctx, key) {
 
   vscode.window.showInformationMessage(`🏆 ${ACH_NAMES[key]||key} unlocked!`, 'View Achievements').then(r => {
     if (r === 'View Achievements') {
-      vscode.commands.executeCommand('workbench.view.extension.goldElite');
+      vscode.commands.executeCommand('workbench.view.extension.gold-elite-2-0').then(undefined, () => {});
     }
-  });
+  }, () => {});
 
   setTimeout(() => {
     const all=['firstLight','momentum','nightOwl','streakKeeper','bracketMaster','debugger','cleanSweep','theElite'];
@@ -425,9 +427,6 @@ function setupDec(ctx) {
     const ed = vscode.window.activeTextEditor;
     if (!ed || ed.document.uri.toString() !== doc.uri.toString()) return;
     const r = new vscode.Range(ed.document.lineAt(0).range.start, ed.document.lineAt(ed.document.lineCount-1).range.end);
-    if (flashDec) flashDec.dispose();
-    flashDec = vscode.window.createTextEditorDecorationType({border:'2px solid #FFD700', borderWidth:'0 0 0 2px'});
-    ctx.subscriptions.push(flashDec);
     ed.setDecorations(flashDec, [{range: r}]);
     setTimeout(() => {
       if (flashDec) ed.setDecorations(flashDec, []);
@@ -474,10 +473,12 @@ function resetAllData(ctx) {
 function setupEco(ctx) {
   if(!isFeatureEnabled('ecosystemTheming.enabled'))return;
   const prompted=ctx.globalState.get('ecoPrompted',[]);
+  if(!Array.isArray(prompted))return;
   const chk=(id,name,extId,fn)=>{if(prompted.includes(id))return;const ex=vscode.extensions.getExtension(extId);if(!ex)return;
     vscode.window.showInformationMessage('Gold Elite: Align '+name+' colors?','Apply','Not now').then(r=>{
-      if(r==='Apply'){fn();vscode.window.showInformationMessage('Gold Elite: '+name+' settings applied.')}
-      const p=ctx.globalState.get('ecoPrompted',[]);p.push(id);ctx.globalState.update('ecoPrompted',p);})};
+      if(r==='Apply'){try{fn();vscode.window.showInformationMessage('Gold Elite: '+name+' settings applied.')}catch(e){console.error('GE: eco apply error',e);}}
+      const p=ctx.globalState.get('ecoPrompted',[]);if(Array.isArray(p)){p.push(id);ctx.globalState.update('ecoPrompted',p);}
+    },()=>{})};
   chk('gitlens','GitLens','eamodio.gitlens',()=>{
     const c=vscode.workspace.getConfiguration(),t=vscode.ConfigurationTarget.Global;
     c.update('gitlens.currentLine.backgroundColor','#1A1A1280',t);
@@ -508,6 +509,16 @@ function teardown() {
 }
 
 function activate(ctx) {
+  if (_sbSetup || _decSetup) {
+    _sbSetup = false; _decSetup = false;
+    if(focusTI){clearInterval(focusTI);focusTI=undefined}
+    if(idleI){clearInterval(idleI);idleI=undefined}
+    if(scanTimer){clearTimeout(scanTimer);scanTimer=undefined}
+    focusSB=undefined; savePSB=undefined; streakSB=undefined; hudSB=undefined;
+    flashDec=undefined; todoDec=undefined; fixmeDec=undefined; noteDec=undefined;
+    bootPanel=undefined;
+  }
+
   try {
     ctx.subscriptions.push(
       vscode.commands.registerCommand('gold-elite-2-0.openFontPage',()=>vscode.env.openExternal(vscode.Uri.parse('https://github.com/microsoft/cascadia-code/releases'))),
@@ -525,39 +536,39 @@ function activate(ctx) {
           ['Boot shown this session',ctx.workspaceState.get('bootSequence.hasShownThisSession',false)],
           ['Is active',true]];
         vscode.window.showInformationMessage('Gold Elite diagnostics:\n'+items.map(([k,v])=>`  ${k}: ${v}`).join('\n'));
-      }),
+      })
+    );
+  } catch(e) { console.error('GE: command registration error',e); }
+
+  try {
+    ctx.subscriptions.push(
       vscode.window.registerWebviewViewProvider('goldElite.commandCenter',new CCProvider(ctx))
     );
+  } catch(e) { console.error('GE: view provider registration error',e); }
 
-    setTimeout(() => {
-      try {
-        const hb = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 1);
-        hb.text = '✦ GE'; hb.color = '#FFD700'; hb.tooltip = 'Gold Elite v2 — Active'; hb.show();
-        ctx.subscriptions.push(hb);
-      } catch(e) { console.error('GE: hb error',e); }
-    }, 100);
+  setTimeout(() => {
+    try { showBootV2(ctx); } catch(e) { console.error('GE: boot error',e); }
+    try { setupSB(ctx); } catch(e) { console.error('GE: SB error',e); }
+    try { setupDec(ctx); } catch(e) { console.error('GE: dec error',e); }
+    try { setupEco(ctx); } catch(e) { console.error('GE: eco error',e); }
+  }, 0);
 
-    setTimeout(() => {
-      try { showBootV2(ctx); } catch(e) { console.error('GE: boot error',e); }
-      try { setupSB(ctx); } catch(e) { console.error('GE: SB error',e); }
-      try { setupDec(ctx); } catch(e) { console.error('GE: dec error',e); }
-      try { setupEco(ctx); } catch(e) { console.error('GE: eco error',e); }
-      try {
-        ctx.subscriptions.push(
-          vscode.workspace.onDidSaveTextDocument(doc => { try { if (isFeatureEnabled('experience.enabled')) onSave(ctx); } catch(e) { console.error('GE: save error',e); } }),
-          vscode.workspace.onDidChangeConfiguration(e => {
-            try {
-              if (!e.affectsConfiguration(CONFIG_NS)) return;
-              const master = vscode.workspace.getConfiguration(CONFIG_NS).get('experience.enabled', true);
-              if (!master) { teardown(); return; }
-            } catch(e) { console.error('GE: config change error',e); }
-          })
-        );
-      } catch(e) { console.error('GE: subscription error',e); }
-    }, 500);
-  } catch(e) { console.error('GE: activation error',e); }
+  try {
+    ctx.subscriptions.push(
+      vscode.workspace.onDidSaveTextDocument(doc => { try { if (isFeatureEnabled('experience.enabled')) onSave(ctx); } catch(e) { console.error('GE: save error',e); } }),
+      vscode.workspace.onDidChangeConfiguration(e => {
+        try {
+          if (!e.affectsConfiguration(CONFIG_NS)) return;
+          const master = vscode.workspace.getConfiguration(CONFIG_NS).get('experience.enabled', true);
+          if (!master) { teardown(); return; }
+        } catch(e) { console.error('GE: config change error',e); }
+      })
+    );
+  } catch(e) { console.error('GE: listener registration error',e); }
 }
 
-function deactivate() {}
+function deactivate() {
+  try { teardown(); } catch(e) {}
+}
 
 module.exports = { activate, deactivate };

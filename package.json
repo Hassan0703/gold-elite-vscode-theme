@@ -4,6 +4,7 @@
   "description": "A premium near-black VS Code theme with a gold-emerald dual-tone accent system. Warm, cohesive, and unmissable — the signature IDE experience.",
   "version": "0.4.0",
   "publisher": "hassan-ali",
+  "icon": "icon.png",
   "license": "MIT",
   "engines": {
     "vscode": "^1.129.0"
@@ -26,11 +27,7 @@
     "theme": "dark"
   },
   "activationEvents": [
-    "onStartupFinished",
-    "onCommand:gold-elite-2-0.openFontPage",
-    "onCommand:gold-elite-2-0.replayBoot",
-    "onCommand:gold-elite-2-0.resetAllData",
-    "onCommand:gold-elite-2-0.diagnose"
+    "onStartupFinished"
   ],
   "main": "./extension.js",
   "repository": {
@@ -50,6 +47,7 @@
     "views": {
       "goldElite": [
         {
+          "type": "webview",
           "id": "goldElite.commandCenter",
           "name": "Command Center"
         }
@@ -60,6 +58,13 @@
         "label": "Gold_Elite-2.0",
         "uiTheme": "vs-dark",
         "path": "./themes/gold-elite-color-theme.json"
+      }
+    ],
+    "iconThemes": [
+      {
+        "id": "gold-elite-icons",
+        "label": "Gold Elite Icons",
+        "path": "./icons/gold-elite-icon-theme.json"
       }
     ],
     "commands": [
@@ -136,6 +141,64 @@
           "description": "Adapt other extensions' colors."
         }
       }
-    }
+    },
+
+    "walkthroughs": [
+      {
+        "id": "goldElite.walkthrough",
+        "title": "Gold Elite Signature Experience",
+        "description": "Discover what makes Gold Elite different — a guided tour of every feature.",
+        "steps": [
+          {
+            "id": "welcome",
+            "title": "Welcome to Gold Elite",
+            "description": "Gold Elite is more than a color theme. It's a full IDE experience with animated boot sequences, a live command center dashboard, living status bar, achievements, optional sound design, and ecosystem integrations. All of it is optional, all of it respects your privacy (zero network calls), and every feature has its own off-switch.",
+            "media": {
+              "markdown": "This is the final iteration of the Gold Elite project — three PRDs, multiple phases, and a coordinated color system from `#0A0A0A` near-black to `#FFD700` gold. Everything you see here is built on official VS Code extension APIs only."
+            }
+          },
+          {
+            "id": "commandCenter",
+            "title": "Command Center Dashboard",
+            "description": "The Gold Elite icon in the activity bar opens the Command Center — a live dashboard showing session stats, Git status, TODO/FIXME counts, and recent files. It updates in real time while the panel is visible and pauses when hidden to save CPU.",
+            "media": {
+              "markdown": "To open it, click the Gold Elite icon in the activity bar. The dashboard includes live session stats, a Git snapshot, TODO/FIXME tracking, recent file cards, and an achievements section."
+            }
+          },
+          {
+            "id": "livingStatusBar",
+            "title": "Living Status Bar",
+            "description": "Three status bar items make the IDE feel alive: a focus timer that pauses when you're idle, a save-pulse dot that briefly glows gold on every save, and a coding streak counter that tracks consecutive days with at least one save.",
+            "media": {
+              "markdown": "Look at the bottom-right of the status bar. The focus timer (`⏱`), save pulse (`●`/`○`), and streak (`🔥`) all appear there when active."
+            }
+          },
+          {
+            "id": "achievements",
+            "title": "Achievements System",
+            "description": "Unlock achievements as you code: First Light, Momentum, Night Owl, Streak Keeper, Bracket Master, Debugger, Clean Sweep, and The Elite. All data is stored locally in VS Code's globalState — nothing is synced, nothing is sent anywhere.",
+            "media": {
+              "markdown": "Achievement toasts slide in from the bottom-right when you unlock one. You can view all achievements (locked and unlocked) in the Command Center dashboard."
+            }
+          },
+          {
+            "id": "sound",
+            "title": "Optional Sound Design",
+            "description": "Gold Elite can play premium sound cues on save, achievement unlocks, and errors. This defaults to **OFF** — you must explicitly enable it in settings. All sounds are under 1 second, royalty-free, and bundled locally. Network requests: zero.",
+            "media": {
+              "markdown": "Enable `goldElite.sound.enabled` in settings to try it. Adjust volume with `goldElite.sound.volume`."
+            }
+          },
+          {
+            "id": "font",
+            "title": "Recommended Font Installation",
+            "description": "This theme is designed to pair with **Cascadia Code** (Microsoft's open-source monospace font with ligatures and true italics).\n\n1. Download Cascadia Code from the releases page\n2. Install the font at the OS level (Windows/Mac: double-click the `.ttf` files, Linux: copy to `~/.local/share/fonts` and run `fc-cache -f`)\n3. Reload VS Code\n\nUse the **Gold Elite: Open Font Download Page** command to open the download page. If the font isn't installed, VS Code falls back gracefully to JetBrains Mono, then Consolas, then the system default.",
+            "media": {
+              "markdown": "Run **Gold Elite: Open Font Download Page** from the Command Palette."
+            }
+          }
+        ]
+      }
+    ]
   }
 }
